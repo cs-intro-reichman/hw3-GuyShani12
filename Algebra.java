@@ -10,12 +10,12 @@ public class Algebra {
 	    System.out.println(minus(7,2));  // 7 - 2
    		System.out.println(minus(2,7));  // 2 - 7
  		System.out.println(times(3,4));  // 3 * 4
-		 System.out.println(times(-3,5));  // 3 * 4
    		System.out.println(plus(2,times(4,2)));  // 2 + 4 * 2
    		System.out.println(pow(5,3));      // 5^3
    		System.out.println(pow(3,5));      // 3^5
    		System.out.println(div(12,3));   // 12 / 3    
    		System.out.println(div(5,5));    // 5 / 5  
+		   System.out.println(div(-20,-5));
    		System.out.println(div(25,7));   // 25 / 7
    		System.out.println(mod(25,7));   // 25 % 7
    		System.out.println(mod(120,6));  // 120 % 6    
@@ -120,7 +120,7 @@ public class Algebra {
 				}
 			}
 			if (x2 < 0){
-				while (plus(num, x2) <= 0)
+				while (plus(num, x2) >= 0)
 				{
 					num = plus(num, x2);
 					count--;
@@ -136,8 +136,7 @@ public class Algebra {
 				}
 			}
 			if (x2 < 0){
-				num = -x1;
-				while (minus(num, x2) >= 0)
+				while (minus(num, x2) <= 0)
 				{
 					num = minus(num, x2);
 					count++;
