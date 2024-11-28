@@ -48,16 +48,16 @@ public class Anagram {
 				}
 			}
 
-			char c2 = str2.charAt(i);
+			char c2 = c1;
 			for (int j = 0; j < str2.length(); j++)
 			{
 				if (c2 == str2.charAt(j))
 				{
 					count2++;
 				}
-				if (count1 != count2){
-					return false;
-				}
+			}
+			if (count1 != count2){
+				return false;
 			}
 		}
 		return true;
@@ -71,12 +71,12 @@ public class Anagram {
 		for (int i = 0; i < str.length(); i++)
 		{
 			if (str.charAt(i) >= 'A' && str.charAt(i) <= 'Z'){
-				newStr = newStr + (char)(str.charAt(i + 32));
+				newStr = newStr + (char)(str.charAt(i) + 32);
 			}
-			if (str.charAt(i) >= 'a' && str.charAt(i) <= 'z'){
+			else if (str.charAt(i) >= 'a' && str.charAt(i) <= 'z'){
 				newStr = newStr + str.charAt(i);
 			}
-			if (str.charAt(i) == ' '){
+			else if (str.charAt(i) == ' '){
 				newStr = newStr + str.charAt(i);
 			}
 		}
@@ -88,9 +88,9 @@ public class Anagram {
 		for (int i = 0; i < str.length(); i++)
 		{
 			if (str.charAt(i) >= 'A' && str.charAt(i) <= 'Z'){
-				newStr = newStr + (char)(str.charAt(i + 32));
+				newStr = newStr + (char)(str.charAt(i) + 32);
 			}
-			if (str.charAt(i) >= 'a' && str.charAt(i) <= 'z'){
+			else if (str.charAt(i) >= 'a' && str.charAt(i) <= 'z'){
 				newStr = newStr + str.charAt(i);
 			}
 		}
@@ -104,9 +104,9 @@ public class Anagram {
 		String tempStr = strCopy;
 		String newStr = "";
 		
-		while (newStr.length() > 0)
+		while (tempStr.length() > 0)
 		{
-			int x = (int)(Math.random() * strCopy.length());
+			int x = (int)(Math.random() * tempStr.length());
 			char c = strCopy.charAt(x);
 			newStr = newStr + c;
 			String updateStr = "";
