@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /** Functions for checking if a given string is an anagram. */
 public class Anagram {
 	public static void main(String args[]) {
@@ -28,22 +30,96 @@ public class Anagram {
 
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
-		// Replace the following statement with your code
-		return false;
+		str1 = preProcessNoSpace(str1);
+		str2 = preProcessNoSpace(str2);
+		if (str1.length() != str2.length()){
+			return false;
+		}
+		
+		for (int i = 0; i < str1.length(); i++)
+		{
+			int count1 = 0;
+			int count2 = 0;
+			char c1 = str1.charAt(i);
+			for (int j = 0; j < str1.length(); j++)
+			{
+				if (c1 == str1.charAt(j)){
+					count1++; 
+				}
+			}
+
+			char c2 = c1;
+			for (int j = 0; j < str2.length(); j++)
+			{
+				if (c2 == str2.charAt(j))
+				{
+					count2++;
+				}
+			}
+			if (count1 != count2){
+				return false;
+			}
+		}
+		return true;
 	}
 	   
 	// Returns a preprocessed version of the given string: all the letter characters are converted
 	// to lower-case, and all the other characters are deleted, except for spaces, which are left
 	// as is. For example, the string "What? No way!" becomes "whatnoway"
 	public static String preProcess(String str) {
-		// Replace the following statement with your code
-		return "";
+		String newStr = "";
+		for (int i = 0; i < str.length(); i++)
+		{
+			if (str.charAt(i) >= 'A' && str.charAt(i) <= 'Z'){
+				newStr = newStr + (char)(str.charAt(i) + 32);
+			}
+			else if (str.charAt(i) >= 'a' && str.charAt(i) <= 'z'){
+				newStr = newStr + str.charAt(i);
+			}
+			else if (str.charAt(i) == ' '){
+				newStr = newStr + str.charAt(i);
+			}
+		}
+		return newStr;
+	} 
+
+	public static String preProcessNoSpace(String str) {
+		String newStr = "";
+		for (int i = 0; i < str.length(); i++)
+		{
+			if (str.charAt(i) >= 'A' && str.charAt(i) <= 'Z'){
+				newStr = newStr + (char)(str.charAt(i) + 32);
+			}
+			else if (str.charAt(i) >= 'a' && str.charAt(i) <= 'z'){
+				newStr = newStr + str.charAt(i);
+			}
+		}
+		return newStr;
 	} 
 	   
 	// Returns a random anagram of the given string. The random anagram consists of the same
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
-		// Replace the following statement with your code
-		return "";
+		String strCopy = preProcess(str);
+		String tempStr = strCopy;
+		String newStr = "";
+		
+		while (tempStr.length() > 0)
+		{
+			int x = (int)(Math.random() * tempStr.length());
+			char c = tempStr.charAt(x);
+			newStr = newStr + c;
+			String updateStr = "";
+
+			for (int i = 0; i < tempStr.length(); i++)
+			{
+				if (i != x){
+					updateStr += tempStr.charAt(i);
+				}
+			}
+
+			tempStr = updateStr;
+		}
+		return newStr;
 	}
 }
