@@ -107,7 +107,7 @@ public class Anagram {
 		while (tempStr.length() > 0)
 		{
 			int x = (int)(Math.random() * tempStr.length());
-			char c = strCopy.charAt(x);
+			char c = tempStr.charAt(x);
 			newStr = newStr + c;
 			String updateStr = "";
 
