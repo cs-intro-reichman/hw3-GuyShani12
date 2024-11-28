@@ -50,7 +50,7 @@ public class Algebra {
 				num--;
 			}
 			}
-		else {
+		if (x2 < 0) {
 			for (int i = 0; i > x2; i--)
 			{
 				num++;
@@ -67,33 +67,29 @@ public class Algebra {
 		}
 		if (x1 > 0 ){
 			if (x2 > 0){
-				sum = x1;
-				for (int i = 0; i < x1; i++)
+				for (int i = 0; i < x2; i++)
 				{
-				sum = sum + plus(sum, x2);
+				sum = plus(sum, x1);
 				}
 			}
-			else{
-				sum = -x1;
-				for (int i = 0; i < x1; i++)
+			if (x2 < 0){
+				for (int i = x2; i < 0; i++)
 				{
-				sum = sum + minus(sum, x2);
+					sum = plus(sum, x1);
 				}
 			}
 		}
 		if (x1 < 0){
 			if (x2 < 0){
-				sum = -x1;
-				for (int i = 0; i > x1; i--)
+				for (int i = x2; i < 0; i++)
 				{
-				sum = sum + plus(sum, x2);
+					sum = plus(sum, x1);
 				}
 			}
-			else{
-				sum = x1;
-				for (int i = 0; i > x1; i--)
+			if (x2 > 0){
+				for (int i = 0; i > x2; i++)
 				{
-				sum = sum + minus(sum, x2);
+					sum = plus(sum, x1);
 				}
 		}
 	}	
@@ -102,10 +98,10 @@ public class Algebra {
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
-		int num = x;
+		int num = 1;
 		for (int i = 0; i < n; i++)
 		{
-			num = times(num, num);
+			num = times(num, x);
 		}
 		return num;
 	}
@@ -113,11 +109,41 @@ public class Algebra {
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
 		int num = x1;
-		while (minus(num, x2) < x2)
-		{
-			num = minus(num, x2);
+		int count = 0;
+		if (x1 > 0){
+			if (x2 > 0){
+				while (minus(num, x2) >= 0)
+				{
+					num = minus(num, x2);
+					count++;
+				}
+			}
+			if (x2 < 0){
+				while (plus(num, x2) <= 0)
+				{
+					num = plus(num, x2);
+					count--;
+				}
+			}
 		}
-		return (num);
+		if (x1 < 0){
+			if (x2 > 0){
+				while (plus(num, x2) <= 0)
+				{
+					num = plus(num, x2);
+					count--;
+				}
+			}
+			if (x2 < 0){
+				num = -x1;
+				while (minus(num, x2) >= 0)
+				{
+					num = minus(num, x2);
+					count++;
+				}
+			}
+		}
+		return count;
 	}
 
 	// Returns x1 % x2
@@ -134,6 +160,11 @@ public class Algebra {
 		while (minus(x, pow(i, 2)) > i){
 			i++;
 		}
+		if (pow(i, 2) == x){
 		return i;
+		}
+		else {
+			return (i - 1);
+		}
 }  	  
 }
